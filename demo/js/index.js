@@ -1,70 +1,47 @@
 marked.use(markedJira());
 
-const editor = ace.edit('editor', {
-  mode: 'ace/mode/markdown',
-  selectionStyle: 'text',
+const $inputElement = document.getElementById('markdown');
+const $outputElement = document.getElementById('jira');
+const $btnGenerate = document.getElementById('generate');
+const $btnCopy = document.getElementById('copy');
+const $btnClear = document.getElementById('clear');
 
-});
-const preview = document.getElementById('preview');
-const generateButton = document.getElementById('generate');
-const copyButton = document.querySelector('.copy');
 
-function jsonString(input, level) {
-  level = level || 0;
-  if (Array.isArray(input)) {
-    if (input.length === 0) {
-      return '[]';
-    }
-    const items = [];
-    let i;
-    if (!Array.isArray(input[0]) && typeof input[0] === 'object' && input[0] !== null) {
-      for (i = 0; i < input.length; i++) {
-        items.push(' '.repeat(2 * level) + jsonString(input[i], level + 1));
-      }
-      return '[\n' + items.join('\n') + '\n]';
-    }
-    for (i = 0; i < input.length; i++) {
-      items.push(jsonString(input[i], level));
-    }
-    return '[' + items.join(', ') + ']';
-  } else if (typeof input === 'object' && input !== null) {
-    const props = [];
-    for (const prop in input) {
-      props.push(prop + ':' + jsonString(input[prop], level));
-    }
-    return '{' + props.join(', ') + '}';
-  } else {
-    return JSON.stringify(input);
-  }
+$inputElement.addEventListener('change', handleInput);
+$inputElement.addEventListener('keyup', handleInput);
+$inputElement.addEventListener('keypress', handleInput);
+$inputElement.addEventListener('keydown', handleInput);
+
+$btnGenerate.addEventListener('click', generate);
+$btnCopy.addEventListener('click', copy);
+$btnClear.addEventListener('click', clear);
+
+
+function handleInput() {
+  const html = marked.parse($inputElement.value);
+  $outputElement.value = html;
+};
+
+function generate() {
+  $btnGenerate.querySelector('span').style.display = 'none';
+  $btnGenerate.querySelector('.loader').style.display = '';
+  $btnGenerate.disabled = true;
+  fetch('https://brettterpstra.com/md-lipsum/api/2/3/s/decorate/link/bq/code/headers/ul/ol').then(response => response.text()).then(text => {
+    $inputElement.value = text;
+    $inputElement.dispatchEvent(new Event('change'));
+    document.querySelector('.loader').style.display = 'none';
+    document.querySelector('button span').style.display = '';
+    $btnGenerate.disabled = false;
+  });
 }
 
+function copy() {
+  $outputElement.select();
+  $outputElement.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText($outputElement.value);
+}
 
-editor.addEventListener('change', () => {
-  const lexed = marked.lexer(editor.getValue());
-  const html = marked.parser(lexed);
-  const textNode = document.createTextNode(html);
-  document.querySelector('#content').innerHTML = '';
-  document.querySelector('#content').appendChild(textNode);
-});
-
-generateButton.addEventListener('click', () => {
-  document.querySelector('button span').style.display = 'none';
-  document.querySelector('.loader').style.display = 'inline-block';
-  generateButton.disabled = true;
-  fetch('https://brettterpstra.com/md-lipsum/api/2/3/s/decorate/link/bq/code/headers/ul/ol').then(response => response.text()).then(text => {
-    editor.setValue(text);
-    document.querySelector('.loader').style.display = 'none';
-    document.querySelector('button span').style.display = 'inline-block';
-    generateButton.disabled = false;
-  });
-});
-
-copyButton.addEventListener('click', () => {
-  const range = document.createRange();
-  range.selectNode(document.getElementById('content'));
-  window.getSelection().removeAllRanges();
-  window.getSelection().addRange(range);
-  document.execCommand('copy');
-});
-
-editor.focus();
+function clear() {
+  $inputElement.value = '';
+  $outputElement.value = '';
+}
