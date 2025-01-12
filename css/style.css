@@ -1,73 +1,73 @@
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  margin: 0;
-  padding: 0;
-  height: 90vh;
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+	background-color: #fbfbfb;
+	height: 100%;
+	overflow: auto;
 }
 
-h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+textarea {
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+	font-size: 12px;
+	resize: none;
+}
+
+header {
+	padding-top: 10px;
+	display: flex;
+	height: 58px;
+}
+
+header h1 {
+	margin: 0;
+}
+
+.label {
+	display: flex;
+	gap: 6px	;
+}
+
+.other-links {
+	margin-left: 3em;
+}
+
+.containers {
+	display: flex;
+	height: calc(100vh - 68px);
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  flex: 1;
+	flex-basis: 50%;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	box-sizing: border-box;
 }
 
-#editor {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-right: none;
-  resize: none;
-  font-size: 16px;
+.pane, .inputPane {
+	margin-top: 5px;
+	padding: 0.6em;
+	border: 1px solid #ccc;
+	overflow: auto;
+	flex-grow: 1;
+	flex-shrink: 1;
 }
 
-.preview {
-  flex: 1;
-  margin: 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-left: none;
-  background-color: #f9f9f9;
-  overflow: hidden;
-  position: relative;
+#preview {
+	display: flex;
 }
 
-#content {
-  margin: 0;
-  overflow: auto;
-  height: 100%;
+#preview iframe {
+	flex-grow: 1;
 }
 
-button span {
-  display: inline-block;
-  width: 10ch;
+#main {
+	display: none;
 }
 
-main {
-  display: flex;
-  flex: 1;
-  max-width: 80%;
-}
-
-.copy {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  cursor: pointer;
-}
-
-.button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
+#generate {
+	width: 95px;
 }
