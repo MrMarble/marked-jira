@@ -11,3 +11,11 @@ export function tokenIsCode(token: Token): token is Tokens.Code {
 export function tokenIsTable(token: Token): token is Tokens.Table {
   return token.type === 'table';
 }
+
+export function tokenIsLink(token: Token): token is Tokens.Link {
+  return token.type === 'link';
+}
+
+export function tokenIsList(token: Token): token is Tokens.List {
+  return token.type === 'list';
+}

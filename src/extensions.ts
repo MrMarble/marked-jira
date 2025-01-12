@@ -1,5 +1,5 @@
 import type { RendererExtension, Token, TokenizerAndRendererExtension, Tokens } from 'marked';
-import { tokenIsCode, tokenIsListItems, tokenIsTable } from './guards.ts';
+import { tokenIsCode, tokenIsLink, tokenIsList, tokenIsListItems, tokenIsTable } from './guards.ts';
 
 export const br: RendererExtension = {
   name: 'br',
@@ -8,49 +8,44 @@ export const br: RendererExtension = {
   },
 };
 
-export const space: TokenizerAndRendererExtension = {
+export const space: RendererExtension = {
   name: 'space',
   renderer(token) {
     return token.raw;
   },
 };
 
-export const paragraph: TokenizerAndRendererExtension = {
+export const paragraph: RendererExtension = {
   name: 'paragraph',
-  level: 'block',
   renderer(token) {
     return `${this.parser.parseInline(token.tokens || [])}`;
   },
 };
 
-export const heading: TokenizerAndRendererExtension = {
+export const heading: RendererExtension = {
   name: 'heading',
-  level: 'block',
   renderer(token) {
     const newLines = token.raw.match(/\n/g)?.length || 1;
     return `h${token.depth}. ${this.parser.parseInline(token.tokens || [])}${'\n'.repeat(newLines)}`;
   },
 };
 
-export const bold: TokenizerAndRendererExtension = {
+export const bold: RendererExtension = {
   name: 'strong',
-  level: 'inline',
   renderer(token) {
     return `*${this.parser.parseInline(token.tokens || [])}*`;
   },
 };
 
-export const italic: TokenizerAndRendererExtension = {
+export const italic: RendererExtension = {
   name: 'em',
-  level: 'inline',
   renderer(token) {
     return `_${this.parser.parseInline(token.tokens || [])}_`;
   },
 };
 
-export const strikethrough: TokenizerAndRendererExtension = {
+export const strikethrough: RendererExtension = {
   name: 'del',
-  level: 'inline',
   renderer(token) {
     return `-${this.parser.parseInline(token.tokens || [])}-`;
   },
@@ -147,10 +142,10 @@ export const monospaced: TokenizerAndRendererExtension = {
   },
 };
 
-export const link: TokenizerAndRendererExtension = {
+export const link: RendererExtension = {
   name: 'link',
-  level: 'inline',
-  renderer(token) {
+  renderer(token: Tokens.Link | Tokens.Generic) {
+    if (!tokenIsLink(token)) return '';
     if (token?.text === token?.href) {
       return `[${token.href}]`;
     } else if (token?.text) {
@@ -163,6 +158,7 @@ export const list: TokenizerAndRendererExtension = {
   name: 'list',
   level: 'block',
   renderer(token: Tokens.List | Tokens.Generic) {
+    if (!tokenIsList(token)) return '';
     const ordered = token.ordered;
     const type = ordered ? '#' : '*';
 
