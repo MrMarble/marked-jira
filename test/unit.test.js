@@ -16,6 +16,12 @@ describe('market-jira', () => {
     assert.strictEqual(jira, 'h1. Heading\n\n\n\nText1\n\n----\nText2');
   });
 
+  it('should not add extra newlines', () => {
+    const md = '1. Etiam beatissimum?\n2. Haec dicuntur fortasse ieiunius;\n\n## Comprehensum, quod cognitum non habet?';
+    const jira = market.parse(md);
+    assert.strictEqual(jira, '# Etiam beatissimum?\n# Haec dicuntur fortasse ieiunius;\n\nh2. Comprehensum, quod cognitum non habet?\n');
+  });
+
   it('should render table', () => {
     const md = '| Header1 | Header2 |\n|---------|---------|\n| Cell1   | Cell2   |';
     const jira = market.parse(md);
@@ -74,7 +80,7 @@ describe('market-jira', () => {
     ].forEach(({ name, md, jira }) => {
       it(name, () => {
         const result = market.parse(md);
-        assert.strictEqual(result, jira + '\n');
+        assert.strictEqual(result, jira);
       });
     });
   });

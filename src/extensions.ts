@@ -168,7 +168,7 @@ export const list: TokenizerAndRendererExtension = {
       body += type.repeat(token.depth ?? 1) + ' ' + listItem.renderer.call(this, item) + '\n';
     }
 
-    return body.replace(/\n+/g, '\n');
+    return body.trimEnd();
   },
 };
 
@@ -220,7 +220,6 @@ export const table: RendererExtension = {
 export const hr: RendererExtension = {
   name: 'hr',
   renderer() {
-    console.log('hr');
     return '----\n';
   },
 };
