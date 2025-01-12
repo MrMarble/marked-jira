@@ -1,0 +1,21 @@
+name: Demo
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/demo.yaml"
+      - "demo/**"
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./demo
