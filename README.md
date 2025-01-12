@@ -1,5 +1,10 @@
 # marked-jira
+
+[![npm](https://badgen.net/npm/v/marked-jira)](https://www.npmjs.com/package/marked-jira)
+[![install size](https://badgen.net/packagephobia/install/marked-jira)](https://packagephobia.now.sh/result?p=marked-jira)
+[![downloads](https://badgen.net/npm/dt/marked-jira)](https://www.npmjs.com/package/marked-jira)
 [![Test](https://github.com/MrMarble/marked-jira/actions/workflows/test.yaml/badge.svg)](https://github.com/MrMarble/marked-jira/actions/workflows/test.yaml)
+
 A custom renderer for [marked](https://marked.js.org) that generates Jira-compatible markup.
 
 Currently, it supports the following features:
