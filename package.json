@@ -1,0 +1,68 @@
+{
+  "name": "marked-jira",
+  "description": "A custom renderer for marked that generates Jira-compatible markup.",
+  "author": "Alvaro Tinoco",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.esm.js",
+  "browser": "./lib/index.umd.js",
+  "files": [
+    "lib/",
+    "marked-jira.min.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/index.esm.js",
+      "require": "./lib/index.cjs"
+    },
+    "./marked-jira.min.js": "./marked-jira.min.js"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js",
+    "test": "npm run build && npm run test:unit",
+    "test:unit": "node --test --test-reporter=spec test",
+    "format": "eslint --fix",
+    "lint": "eslint"
+  },
+  "keywords": [
+    "marked",
+    "extension",
+    "jira",
+    "markdown"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mrmarble/marked-jira.git"
+  },
+  "bugs": {
+    "url": "https://gihub.com/mrmarble/marked-jira/issues"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "devDependencies": {
+    "@markedjs/eslint-config": "^1.0.9",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@semantic-release/commit-analyzer": "^13.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
+    "@semantic-release/release-notes-generator": "^14.0.2",
+    "dts-bundle-generator": "^9.5.1",
+    "eslint": "^9.17.0",
+    "rollup": "^4.29.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0"
+  },
+  "peerDependencies": {
+    "marked": "15.x"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
