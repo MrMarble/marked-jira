@@ -1,4 +1,5 @@
 # marked-jira
+[![Test](https://github.com/MrMarble/marked-jira/actions/workflows/test.yaml/badge.svg)](https://github.com/MrMarble/marked-jira/actions/workflows/test.yaml)
 A custom renderer for [marked](https://marked.js.org) that generates Jira-compatible markup.
 
 Currently, it supports the following features:
