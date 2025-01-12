@@ -19,7 +19,7 @@ Currently, it supports the following features:
 
 
 ## Demo
-Check out the [demo](https://marked-jira.mrmarble.dev) to see it in action. 👀
+Check out the [demo](https://mrmarble.github.io/marked-jira) to see it in action. 👀
 
 
 ## Usage
