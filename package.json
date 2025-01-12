@@ -2,7 +2,7 @@
   "name": "marked-jira",
   "description": "A custom renderer for marked that generates Jira-compatible markup.",
   "author": "Alvaro Tinoco",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "./lib/index.cjs",
   "module": "./lib/index.esm.js",
