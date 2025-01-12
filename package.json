@@ -35,7 +35,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mrmarble/marked-jira.git"
+    "url": "https://github.com/MrMarble/marked-jira"
   },
   "bugs": {
     "url": "https://gihub.com/mrmarble/marked-jira/issues"
