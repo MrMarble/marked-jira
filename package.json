@@ -41,8 +41,7 @@
     "url": "https://gihub.com/mrmarble/marked-jira/issues"
   },
   "publishConfig": {
-    "provenance": true,
-    "access": "public"
+    "provenance": true
   },
   "devDependencies": {
     "@markedjs/eslint-config": "^1.0.9",
