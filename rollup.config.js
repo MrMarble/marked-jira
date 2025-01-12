@@ -27,14 +27,12 @@ export default defineConfig([
     output: [{
       file: 'lib/index.esm.js',
       format: 'esm',
-      sourcemap: true,
       banner,
     },
     {
       file: 'lib/index.umd.js',
       format: 'umd',
       name: 'index',
-      sourcemap: true,
       globals: {
         marked: 'marked',
       },
@@ -64,7 +62,6 @@ export default defineConfig([
       format: 'cjs',
       name: 'index',
       banner,
-      sourcemap: true,
     }],
   },
 ]);
