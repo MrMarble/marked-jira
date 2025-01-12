@@ -18,4 +18,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          cname: mrmarble.dev
           publish_dir: ./demo
